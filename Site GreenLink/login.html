@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | GreenLink</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ESTILO (CSS) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            /* SEU CÓDIGO DE FUNDO ANIMADO AQUI */
+            background: linear-gradient(270deg, #36b5f5, #93f860, #36b5f5);
+            background-size: 400% 400%;
+            animation: fundoAnimado 7s ease infinite;
+            
+            /* Configurações de alinhamento para manter o card no centro */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; 
+        }
+
+        /* A ANIMAÇÃO QUE VOCÊ PEDIU */
+        @keyframes fundoAnimado {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Container para as partículas de fundo */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: transparent; /* Importante: Fundo transparente para ver o gradiente */
+            background-image: url('');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 50%;
+            z-index: 1; 
+        }
+
+        .container {
+            position: relative; 
+            z-index: 2;
+            width: 100%;
+            max-width: 365px;
+            text-align: center;
+            padding: 60px 25px;
+            animation: fadeIn 1.5s ease-out; 
+            margin-top: -50px;
+        }
+
+        .logo-main {
+    width: 320px;
+    
+    /* O SEGREDO: Margem negativa para puxar o que está embaixo para cima */
+    margin-bottom: -10px; /* Teste -30px, -40px ou até -50px */
+    
+    /* Adicione estas 3 linhas para garantir que a logo continue centralizada */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4)); 
+}
+
+        /* Card com efeito de vidro */
+        .login-card {
+    background: rgba(255, 255, 255, 0.451);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
+    /* AQUI ESTÁ A MUDANÇA QUE VOCÊ QUER: */
+    padding-top: 28px;     /* Aumente aqui para descer o "Login" (tente 50px, 60px, 80px) */
+    padding-bottom: 30px;  /* Espaço embaixo */
+    padding-left: 20px;    /* Espaço esquerda */
+    padding-right: 20px;   /* Espaço direita */
+    
+    border-radius: 20px; 
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); 
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+        
+        .login-card:hover {
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2); 
+        }
+
+        h2 {
+    font-family: 'Roboto', sans-serif;
+    color: #555555;
+    font-weight: 700; 
+    
+    /* 1. PARA JUNTAR MAIS (Diminuí de 25px para 10px) */
+    margin-bottom: 10px; 
+    
+    /* 2. PARA TIRAR A SOMBRA */
+    text-shadow: none;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.6); /* Borda mais visível */
+            border-radius: 8px; 
+            font-size: 14px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.7); /* Fundo um pouco mais branco */
+            color: #555555; 
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #ffffff; 
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); 
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        input::placeholder {
+         color: #555555;
+    opacity: 0.8; /* Deixa levemente mais suave, ou use 1 para cor total */
+}
+
+/* Cor do texto quando a pessoa DIGITA */
+input[type="text"], input[type="password"] {
+    color: #555555; /* O texto digitado também fica cinza */
+    /* ... mantenha suas configurações de padding, border etc ... */
+}
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #555555; 
+            margin-bottom: 25px;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .remember-me input[type="checkbox"] {
+            appearance: none; 
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffffff; 
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            background: transparent;
+        }
+
+        .remember-me input[type="checkbox"]:checked {
+            background-color: #ffffff; 
+            border-color: #ffffff;
+        }
+
+        .remember-me input[type="checkbox"]:checked::after {
+            content: '✓'; 
+            color: #36b5f5; /* Tick azul para combinar com o fundo */
+            font-size: 12px;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Estilo dos Botões */
+        .btn {
+    /* 1. TAMANHO IGUAL AO INPUT */
+    width: 100%;
+    padding: 10px 15px; /* Exatamente o mesmo padding do input */
+    margin-bottom: 15px; /* Mesmo espaçamento entre eles */
+    border-radius: 8px; /* Mesma curvatura da borda */
+    font-size: 14px;    /* Mesmo tamanho de letra */
+    
+    /* 2. ESTILO DOS BOTÕES */
+    border: none; /* Botões geralmente não levam borda, mas se quiser igualzinha, coloque a mesma border do input */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espaço entre o ícone e o texto */
+    
+    /* 3. FONTE (Como configuramos antes) */
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    text-transform: none;
+    color: white;
+    
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-transform: none; 
+        }
+
+        .btn:hover {
+            transform: translateY(-2px); 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+        }
+
+        .btn-entrar {
+            background: #ffffff; /* Botão branco para destaque no fundo colorido */
+            color: #36b5f5; /* Texto azul */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-google {
+            background-color: #db4437; 
+            box-shadow: 0 4px 15px rgba(219, 68, 55, 0.4);
+        }
+
+        .btn-facebook {
+            background-color: #3b5998; 
+            box-shadow: 0 4px 15px rgba(59, 89, 152, 0.4);
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5)); 
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div> 
+    
+    <div class="container">
+        <img src="4-transparente.png" alt="Logo" class="logo-main">
+
+        <div class="login-card">
+            <h2>Login</h2>
+
+            <form action="#">
+                <input type="text" placeholder="Usuário" required>
+                <input type="password" placeholder="Senha" required>
+
+                <div class="remember-me">
+                    <input type="checkbox" id="lembrar">
+                    <label for="lembrar">Lembrar Login</label>
+                </div>
+
+                <button type="submit" class="btn btn-entrar">Entrar</button>
+            </form>
+
+            <button class="btn btn-google">
+                <img src="google.png" alt="Google" class="icon">
+                Entrar com Google
+            </button>
+
+            <button class="btn btn-facebook">
+                <img src="facebook.png" alt="Facebook" class="icon">
+                Entrar com Facebook
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        /* CONFIGURAÇÃO DE PARTÍCULAS ATUALIZADA */
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 120,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                },
+                "opacity": {
+                    /* AQUI: Aumentei a opacidade dos pontos */
+                    "value": 0.2,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    /* AQUI ESTÁ O SEGREDO: Aumentei a opacidade das linhas */
+                    "opacity": 0.2, 
+                    /* AQUI: Aumentei um pouquinho a espessura da linha */
+                    "width": 2.0
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 3,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab" 
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push" 
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>
